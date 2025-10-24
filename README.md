@@ -60,7 +60,7 @@ sample/              # Sample data and Postman collection
 
 4. **Verify it's running**
    ```bash
-   curl http://localhost:3000/health
+   curl http://localhost:8080/health
    ```
 
 ### Option 2: Local Development
@@ -191,7 +191,7 @@ All fields are optional. Empty, null, "@", or "none" values are automatically hi
 
 **Generate Binary PDF:**
 ```bash
-curl -X POST http://localhost:3000/cv/generate \
+curl -X POST http://localhost:8080/cv/generate \
   -H "X-API-Key: your-secret-api-key-change-this" \
   -H "Content-Type: application/json" \
   --data @sample/cv.json \
@@ -200,7 +200,7 @@ curl -X POST http://localhost:3000/cv/generate \
 
 **Generate Base64 PDF:**
 ```bash
-curl -X POST http://localhost:3000/cv/generate/base64 \
+curl -X POST http://localhost:8080/cv/generate/base64 \
   -H "X-API-Key: your-secret-api-key-change-this" \
   -H "Content-Type: application/json" \
   --data @sample/cv.json
@@ -230,7 +230,7 @@ Environment variables (see `.env.example`):
 
 | Variable | Default | Description |
 |----------|---------|-------------|
-| `PORT` | 3000 | Server port |
+| `PORT` | 8080 | Server port |
 | `NODE_ENV` | production | Environment (development/production) |
 | `API_KEY` | (required) | API authentication key |
 | `TEMPLATE_NAME` | option-b.hbs | Template file name |
@@ -342,7 +342,7 @@ The service handles SIGTERM and SIGINT signals gracefully:
 
 Monitor the service health:
 ```bash
-curl http://localhost:3000/health
+curl http://localhost:8080/health
 ```
 
 Use this endpoint for:
@@ -449,14 +449,14 @@ If Puppeteer fails to launch:
 
 ### Port Already in Use
 
-If port 3000 is already in use:
+If port 8080 is already in use:
 ```bash
 # Change port in .env
 PORT=3001
 
 # Or in docker-compose.yml
 ports:
-  - "3001:3000"
+  - "3001:8080"
 ```
 
 ### Memory Issues

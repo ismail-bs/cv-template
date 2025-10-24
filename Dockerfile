@@ -1,5 +1,5 @@
 # Multi-stage build for optimized image size
-FROM node:20-alpine AS builder
+FROM node:22-alpine AS builder
 
 # Install build dependencies
 RUN apk add --no-cache python3 make g++
@@ -21,7 +21,7 @@ COPY templates ./templates
 RUN npm run build
 
 # Production stage
-FROM node:20-alpine
+FROM node:22-alpine
 
 # Install Chromium dependencies for Puppeteer
 RUN apk add --no-cache \
@@ -53,11 +53,11 @@ RUN mkdir -p logs && chown -R node:node /app
 USER node
 
 # Expose port
-EXPOSE 3000
+EXPOSE 8080
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
-  CMD node -e "require('http').get('http://localhost:3000/health', (r) => {process.exit(r.statusCode === 200 ? 0 : 1)})"
+  CMD node -e "require('http').get('http://localhost:8080/health', (r) => {process.exit(r.statusCode === 200 ? 0 : 1)})"
 
 # Start application
 CMD ["node", "dist/server.js"]
