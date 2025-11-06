@@ -1,10 +1,12 @@
 import Joi from 'joi';
 
 /**
- * E.164 phone format pattern (international format)
- * Examples: +27123456789, +1234567890
+ * Phone format pattern that accepts:
+ * - E.164 format: +27123456789
+ * - South African local format: 0123456789
+ * - International format without +: 27123456789
  */
-const phonePattern = /^\+?[1-9]\d{1,14}$/;
+const phonePattern = /^(\+?[1-9]\d{1,14}|0\d{9,10})$/;
 
 /**
  * Basic email RFC pattern
@@ -31,6 +33,8 @@ export const cvSchema = Joi.object({
     .optional()
     .allow('', null),
   physical_address: Joi.string().trim().max(500).optional().allow('', null),
+  photo_url: Joi.string().trim().uri().optional().allow('', null),
+  splash_image: Joi.string().trim().uri().optional().allow('', null),
 
   // Career Objective
   career_goal: Joi.string().trim().max(2000).optional().allow('', null),

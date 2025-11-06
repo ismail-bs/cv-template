@@ -8,6 +8,8 @@ export interface CVData {
   phone?: string;
   email?: string;
   physical_address?: string;
+  photo_url?: string; // URL or base64 image data
+  splash_image?: string; // URL for background splash image
 
   // Career Objective
   career_goal?: string;
@@ -65,6 +67,11 @@ export interface ProcessedCVData {
   email?: string;
   physical_address?: string;
   phone_centered?: boolean; // True if email is missing
+  photo_url?: string; // URL or base64 image data
+  splash_image?: string; // URL for background splash image
+
+  // Content mode for adaptive layout
+  contentMode?: 'standard' | 'sparse';
 
   career_goal?: string;
 

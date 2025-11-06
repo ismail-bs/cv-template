@@ -52,6 +52,31 @@ export function normalizeWhitespace(value: string): string {
 }
 
 /**
+ * Format phone number with country code if missing
+ * Assumes South African numbers (+27) if no country code present
+ */
+export function formatPhoneNumber(phone: string | undefined): string | undefined {
+  if (!phone) {
+    return undefined;
+  }
+
+  const trimmed = phone.trim();
+  
+  // Already has country code (starts with +)
+  if (trimmed.startsWith('+')) {
+    return trimmed;
+  }
+
+  // Remove leading 0 if present and add +27
+  if (trimmed.startsWith('0')) {
+    return `+27${trimmed.substring(1)}`;
+  }
+
+  // If no + or 0, assume it needs +27
+  return `+27${trimmed}`;
+}
+
+/**
  * Process a field: trim, normalize, and check if empty
  * Returns the processed value or undefined if empty
  */

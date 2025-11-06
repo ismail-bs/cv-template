@@ -1,5 +1,5 @@
 import { CVData, ProcessedCVData } from '../models/cv.interface';
-import { processField } from '../utils/sanitize';
+import { processField, formatPhoneNumber } from '../utils/sanitize';
 import logger from '../utils/logger';
 
 /**
@@ -21,12 +21,17 @@ export class CVProcessorService {
 
     // Personal Information
     processed.full_name = processField(data.full_name);
-    processed.phone = processField(data.phone);
+    processed.phone = formatPhoneNumber(processField(data.phone));
     processed.email = processField(data.email);
     processed.physical_address = processField(data.physical_address);
+    processed.photo_url = processField(data.photo_url);
+    processed.splash_image = processField(data.splash_image);
 
     // If email is missing, center the phone
     processed.phone_centered = !processed.email && !!processed.phone;
+
+    // Detect content mode (sparse vs standard)
+    processed.contentMode = this.detectContentMode(data);
 
     // Career Objective
     processed.career_goal = processField(data.career_goal);
@@ -40,7 +45,7 @@ export class CVProcessorService {
     const otherQualifications = processField(data.other_qualifications);
 
     if (certificates || otherQualifications) {
-      processed.training_certificates_heading = 'TRAINING CERTIFICATES & OTHER QUALIFICATIONS';
+      processed.training_certificates_heading = 'CERTIFICATIONS & QUALIFICATIONS';
       processed.training_cert_bullet = certificates;
       processed.other_qualifications_bullet = otherQualifications;
     }
@@ -86,6 +91,32 @@ export class CVProcessorService {
     });
 
     return processed;
+  }
+
+  /**
+   * Detect whether CV should use sparse or standard layout
+   * Sparse mode: No work experience OR no tertiary education
+   * Standard mode: Has work experience AND tertiary education
+   */
+  private detectContentMode(data: CVData): 'standard' | 'sparse' {
+    // Check if has any work experience
+    const hasWorkExperience = Boolean(
+      data.cv_format_type_full_1 || 
+      data.cv_format_type_full_2 || 
+      data.cv_format_type_full_3 || 
+      data.cv_format_type_full_4 || 
+      data.cv_format_type_full_5
+    );
+
+    // Check if has tertiary education
+    const hasTertiaryEducation = Boolean(data.tertiary_education);
+
+    // Sparse if lacking either work experience or tertiary education
+    if (!hasWorkExperience || !hasTertiaryEducation) {
+      return 'sparse';
+    }
+
+    return 'standard';
   }
 
   /**
