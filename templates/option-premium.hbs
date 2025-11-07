@@ -1,669 +1,206 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CV</title>
-  <style>
-    @font-face {
-      font-family: 'Open Sans';
-      src: url('data:font/truetype;charset=utf-8;base64,{{openSansRegular}}') format('truetype');
-      font-weight: 400;
-      font-style: normal;
-    }
-    @font-face {
-      font-family: 'Open Sans';
-      src: url('data:font/truetype;charset=utf-8;base64,{{openSansBold}}') format('truetype');
-      font-weight: 700;
-      font-style: normal;
-    }
-    @font-face {
-      font-family: 'Open Sans';
-      src: url('data:font/truetype;charset=utf-8;base64,{{openSansSemibold}}') format('truetype');
-      font-weight: 600;
-      font-style: normal;
-    }
-    @font-face {
-      font-family: 'Raleway';
-      src: url('data:font/truetype;charset=utf-8;base64,{{ralewayRegular}}') format('truetype');
-      font-weight: 400;
-      font-style: normal;
-    }
-    @font-face {
-      font-family: 'Raleway';
-      src: url('data:font/truetype;charset=utf-8;base64,{{ralewayBold}}') format('truetype');
-      font-weight: 700;
-      font-style: normal;
-    }
-    @font-face {
-      font-family: 'Raleway';
-      src: url('data:font/truetype;charset=utf-8;base64,{{ralewaySemibold}}') format('truetype');
-      font-weight: 600;
-      font-style: normal;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html, body {
-      width: 210mm;
-      height: 297mm;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: 'Open Sans', Arial, sans-serif;
-      font-size: 9pt;
-      color: #333333;
-      background: #ffffff;
-      line-height: 1.4;
-      margin: 0;
-      padding: 0;
-    }
-
-    .container {
-      display: flex;
-      width: 210mm;
-      min-height: 297mm;
-      max-height: 297mm;
-      background: #ffffff;
-      overflow: hidden;
-    }
-
-    /* LEFT SIDEBAR - Blue Theme */
-    .left-column {
-      width: 85mm;
-      background: #ffffff;
-      position: relative;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-    }
-
-    /* Photo section */
-    .photo-section {
-      background: #ffffff;
-      position: relative;
-      text-align: center;
-      padding-top: {{#if (eq contentMode 'sparse')}}12mm{{else}}15mm{{/if}};
-      padding-bottom: {{#if (eq contentMode 'sparse')}}8mm{{else}}10mm{{/if}};
-      flex-shrink: 0;
-    }
-
-    .photo {
-      width: 60mm;
-      height: 60mm;
-      border-radius: 50%;
-      border: 3px solid #2c5f99;
-      background: #d0d0d0;
-      margin: 0 auto;
-      display: block;
-      object-fit: cover;
-    }
-
-    /* Name section */
-    .name-section {
-      text-align: center;
-      padding: {{#if (eq contentMode 'sparse')}}10mm{{else}}12mm{{/if}} 8mm {{#if (eq contentMode 'sparse')}}8mm{{else}}10mm{{/if}} 8mm;
-      background: #ffffff;
-      position: relative;
-      flex-shrink: 0;
-    }
-
-    .name {
-      font-family: 'Raleway', sans-serif;
-      font-weight: 700;
-      font-size: {{#if (eq contentMode 'sparse')}}28pt{{else}}32pt{{/if}};
-      color: #2c5f99;
-      line-height: 1.1;
-      margin-bottom: 2mm;
-    }
-
-    .designation {
-      font-family: 'Open Sans', sans-serif;
-      font-weight: 400;
-      font-size: {{#if (eq contentMode 'sparse')}}10pt{{else}}11pt{{/if}};
-      color: #666666;
-      line-height: 1.2;
-      margin-top: 0;
-    }
-
-    /* LEFT SIDEBAR SECTIONS - White background */
-    .left-sec {
-      background: #ffffff;
-      padding: 0 8mm {{#if (eq contentMode 'sparse')}}8mm{{else}}10mm{{/if}} 8mm;
-      position: relative;
-      flex: 1;
-      min-height: 0;
-    }
-
-    .sec-header {
-      display: flex;
-      align-items: center;
-      margin-bottom: 2mm;
-      padding-top: {{#if (eq contentMode 'sparse')}}4mm{{else}}5mm{{/if}};
-      border-top: 1px solid #e0e0e0;
-    }
-
-    .sec-header:first-child {
-      padding-top: {{#if (eq contentMode 'sparse')}}4mm{{else}}5mm{{/if}};
-      border-top: none;
-    }
-
-    .sec-icon {
-      width: 16px;
-      height: 16px;
-      margin-right: 4mm;
-      color: #2c5f99;
-      flex-shrink: 0;
-    }
-
-    .sec-title {
-      font-family: 'Raleway', sans-serif;
-      font-weight: 600;
-      font-size: 10.5pt;
-      color: #2c5f99;
-      margin-bottom: 0;
-    }
-
-    .sec-underline {
-      height: 3px;
-      background: #e0e0e0;
-      margin: 2mm 0 {{#if (eq contentMode 'sparse')}}3mm{{else}}4mm{{/if}} 0;
-    }
-
-    .contact-item {
-      display: flex;
-      align-items: flex-start;
-      margin-bottom: {{#if (eq contentMode 'sparse')}}2.5mm{{else}}3.5mm{{/if}};
-      font-size: 9pt;
-      color: #333333;
-    }
-
-    .contact-icon {
-      width: 16px;
-      height: 16px;
-      margin-right: 3.5mm;
-      color: #2c5f99;
-      flex-shrink: 0;
-      margin-top: 1px;
-    }
-
-    .about-text {
-      font-size: 9pt;
-      text-align: justify;
-      line-height: 1.55;
-      color: #333333;
-    }
-
-    .skills-list {
-      list-style: none;
-      padding: 0;
-    }
-
-    .skills-list li {
-      padding-left: 4.5mm;
-      margin-bottom: {{#if (eq contentMode 'sparse')}}1.5mm{{else}}2.5mm{{/if}};
-      position: relative;
-      font-size: 9pt;
-      color: #333333;
-    }
-
-    .skills-list li::before {
-      content: '•';
-      position: absolute;
-      left: 0;
-      color: #2c5f99;
-      font-weight: bold;
-      font-size: 10pt;
-    }
-
-    /* RIGHT COLUMN */
-    .right-column {
-      flex: 1;
-      padding: {{#if (eq contentMode 'sparse')}}10mm{{else}}12mm{{/if}} 10mm {{#if (eq contentMode 'sparse')}}8mm{{else}}10mm{{/if}} 10mm;
-      background: #ffffff;
-      min-height: 297mm;
-      position: relative;
-    }
-
-    .section {
-      margin-bottom: {{#if (eq contentMode 'sparse')}}6mm{{else}}8mm{{/if}};
-    }
-
-    .section-header {
-      display: flex;
-      align-items: center;
-      margin-bottom: 3mm;
-    }
-
-    .section-icon {
-      width: 18px;
-      height: 18px;
-      margin-right: 3mm;
-      color: #2c5f99;
-    }
-
-    .section-title {
-      font-family: 'Raleway', sans-serif;
-      font-weight: 700;
-      font-size: 12pt;
-      color: #2c5f99;
-    }
-
-    .section-line {
-      height: 2px;
-      background: #e0e0e0;
-      margin-bottom: 4mm;
-    }
-
-    /* Timeline items */
-    .timeline-container {
-      position: relative;
-      padding-left: 10mm;
-    }
-
-    .timeline-item {
-      position: relative;
-      margin-bottom: {{#if (eq contentMode 'sparse')}}4mm{{else}}5mm{{/if}};
-      padding-bottom: {{#if (eq contentMode 'sparse')}}3mm{{else}}4mm{{/if}};
-    }
-
-    .timeline-item::before {
-      content: '';
-      position: absolute;
-      left: -10mm;
-      top: 3mm;
-      width: 10px;
-      height: 10px;
-      background: #e0e0e0;
-      border-radius: 50%;
-      z-index: 2;
-      border: 2px solid #ffffff;
-    }
-
-    .timeline-item:not(:last-child)::after {
-      content: '';
-      position: absolute;
-      left: calc(-10mm + 3px);
-      top: 13mm;
-      width: 3px;
-      background: #e0e0e0;
-      height: calc(100% - 8mm);
-      z-index: 1;
-    }
-
-    .timeline-title {
-      font-family: 'Open Sans', sans-serif;
-      font-weight: 700;
-      font-size: 10pt;
-      color: #2c5f99;
-      margin-bottom: 1mm;
-    }
-
-    .timeline-subtitle {
-      font-family: 'Open Sans', sans-serif;
-      font-style: italic;
-      font-size: 9pt;
-      color: #555555;
-      margin-bottom: 1mm;
-    }
-
-    .timeline-date {
-      font-size: 9pt;
-      color: #777777;
-      margin-bottom: 1.5mm;
-    }
-
-    .timeline-desc {
-      font-size: 9pt;
-      color: #444444;
-      line-height: {{#if (eq contentMode 'sparse')}}1.4{{else}}1.5{{/if}};
-      text-align: justify;
-    }
-
-    /* References */
-    .ref-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: {{#if (eq contentMode 'sparse')}}3mm{{else}}4mm{{/if}};
-    }
-
-    .ref-card {
-      background: #f0f5fa;
-      padding: {{#if (eq contentMode 'sparse')}}2.5mm{{else}}3mm{{/if}};
-      border-left: 3px solid #2c5f99;
-      font-size: 8.5pt;
-      line-height: 1.4;
-    }
-
-    .ref-name {
-      font-weight: 700;
-      color: #2c5f99;
-      margin-bottom: 1mm;
-    }
-
-    .ref-detail {
-      color: #555555;
-      margin-bottom: 0.5mm;
-    }
-
-    @page {
-      size: A4;
-      margin: 0;
-    }
-
-    @media print {
-      html, body {
-        width: 210mm;
-        height: 297mm;
-        margin: 0;
-        padding: 0;
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
-        color-adjust: exact;
-      }
-      
-      .container {
-        page-break-inside: avoid;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<title>CV</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+@page{size:A4;margin:0}
+body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;font-size:10.5pt;color:#5A6C7D;background:#fff;margin:0}
+.container{display:flex;width:210mm;height:297mm;overflow:hidden}
+.left-column{width:35%;background:#fff;color:#2C3E50;position:relative;overflow:hidden;border-right:1px solid #E5E7EB}
+.diagonal{display:none}
+.photo{width:165px;height:165px;border-radius:50%;background:#f0f0f0;margin:40px auto 30px;border:8px solid #E5E7EB;position:relative;z-index:1;overflow:hidden}
+.photo img{width:100%;height:100%;object-fit:cover;display:block}
+.name-box{background:#f8f9fa;padding:24px 30px;margin:0 0 36px;text-align:center;position:relative;z-index:2;border:1px solid #E5E7EB}
+.name-box .name{font-size:30pt;font-weight:700;color:#2C3E50;line-height:1.15;margin-bottom:10px}
+.name-box .title{font-size:12.5pt;font-weight:400;color:#6B7280}
+.left-sec{padding:0 30px 28px;position:relative;z-index:1}
+.left-title{font-size:12pt;font-weight:700;color:#2C3E50;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid #E5E7EB;display:flex;align-items:center;gap:8px}
+.contact-item{display:flex;align-items:flex-start;gap:8px;margin-bottom:13px;font-size:10pt;line-height:1.7;word-break:break-word;color:#5A6C7D}
+.about-text{font-size:10pt;line-height:1.75;text-align:justify;color:#5A6C7D}
+.skills-list{font-size:10pt;line-height:1.7;color:#5A6C7D}
+.right-column{width:65%;padding:42px 36px 40px;background:#fff;overflow-y:auto}
+.right-sec{margin-bottom:32px}
+.sec-header{display:flex;align-items:center;gap:11px;margin-bottom:20px;padding-bottom:10px;border-bottom:1.5px solid #E5E7EB}
+.sec-icon{font-size:14pt;color:#6B7280}
+.sec-title{font-size:13pt;font-weight:700;color:#6B7280}
+.timeline{position:relative;padding-left:26px;margin-bottom:24px}
+.timeline::before{content:'';position:absolute;left:5px;top:7px;width:11px;height:11px;background:#6B7280;border-radius:50%}
+.timeline::after{content:'';position:absolute;left:10px;top:18px;bottom:-12px;width:2px;background:#6B7280}
+.timeline:last-child::after{display:none}
+.entry-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
+.entry-title{font-size:11.5pt;font-weight:600;color:#2C3E50;line-height:1.45}
+.entry-subtitle{font-size:10pt;color:#5A6C7D;margin-bottom:8px;font-style:italic}
+.entry-date{font-size:9.5pt;color:#9CA3AF;flex-shrink:0}
+.entry-desc{font-size:10pt;color:#5A6C7D;line-height:1.7;text-align:justify;margin-top:8px}
+.ref-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.ref-card{font-size:10pt;line-height:1.7}
+.ref-name{font-weight:600;color:#2C3E50}
+.ref-detail{color:#5A6C7D;font-size:9.5pt}
+</style>
 </head>
 <body>
-  <div class="container">
-    <!-- LEFT COLUMN -->
-    <div class="left-column">
-      <!-- Photo -->
-      {{#if photo_url}}
-      <div class="photo-section">
-        <img src="{{photo_url}}" alt="Profile Photo" class="photo" />
-      </div>
-      {{/if}}
-
-      <!-- Name -->
-      <div class="name-section">
-        <div class="name">{{full_name}}</div>
-        {{#if designation}}
-        <div class="designation">{{designation}}</div>
-        {{/if}}
-      </div>
-
-      <!-- Sidebar Sections -->
-      <div class="left-sec">
-        <!-- Contact -->
-        {{#if (or phone email physical_address)}}
-        <div class="sec-header">
-          <svg class="sec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
-          </svg>
-          <div class="sec-title">Contact</div>
-        </div>
-        <div class="sec-underline"></div>
-        
-        {{#if phone}}
-        <div class="contact-item">
-          <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
-          </svg>
-          <span>{{phone}}</span>
-        </div>
-        {{/if}}
-
-        {{#if email}}
-        <div class="contact-item">
-          <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-            <polyline points="22,6 12,13 2,6"/>
-          </svg>
-          <span>{{email}}</span>
-        </div>
-        {{/if}}
-
-        {{#if physical_address}}
-        <div class="contact-item">
-          <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
-            <circle cx="12" cy="10" r="3"/>
-          </svg>
-          <span>{{physical_address}}</span>
-        </div>
-        {{/if}}
-        {{/if}}
-
-        <!-- About Me -->
-        {{#if career_goal}}
-        <div class="sec-header">
-          <svg class="sec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
-            <circle cx="12" cy="7" r="4"/>
-          </svg>
-          <div class="sec-title">About Me</div>
-        </div>
-        <div class="sec-underline"></div>
-        <div class="about-text">{{career_goal}}</div>
-        {{/if}}
-
-        <!-- Skills -->
-        {{#if skills}}
-        <div class="sec-header">
-          <svg class="sec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <rect x="3" y="3" width="7" height="7"/>
-            <rect x="14" y="3" width="7" height="7"/>
-            <rect x="14" y="14" width="7" height="7"/>
-            <rect x="3" y="14" width="7" height="7"/>
-          </svg>
-          <div class="sec-title">Skills</div>
-        </div>
-        <div class="sec-underline"></div>
-        <ul class="skills-list">
-          {{#each (split skills ',')}}
-            {{#if (trim this)}}
-            <li>{{trim this}}</li>
-            {{/if}}
-          {{/each}}
-        </ul>
-        {{/if}}
-
-      </div>
-    </div>
-
-    <!-- RIGHT COLUMN -->
-    <div class="right-column">
-      <!-- Education -->
-      {{#if (or tertiary_education education_matric)}}
-      <div class="section">
-        <div class="section-header">
-          <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
-            <path d="M6 12v5c3 3 9 3 12 0v-5"/>
-          </svg>
-          <div class="section-title">Education</div>
-        </div>
-        <div class="section-line"></div>
-        
-        <div class="timeline-container">
-          {{#if tertiary_education}}
-          <div class="timeline-item">
-            {{{boldFirstLine tertiary_education}}}
-          </div>
-          {{/if}}
-
-          {{#if education_matric}}
-          <div class="timeline-item">
-            {{{boldFirstLine education_matric}}}
-          </div>
-          {{/if}}
-        </div>
-      </div>
-      {{/if}}
-
-      <!-- Experience -->
-      {{#if (or work_experience_1 work_experience_2 work_experience_3 work_experience_4 work_experience_5)}}
-      <div class="section">
-        <div class="section-header">
-          <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
-            <path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/>
-          </svg>
-          <div class="section-title">Experience</div>
-        </div>
-        <div class="section-line"></div>
-        
-        <div class="timeline-container">
-          {{#if work_experience_1}}
-          <div class="timeline-item">
-            <div class="timeline-title">{{work_experience_1.title}}</div>
-            {{#if work_experience_1.company}}
-            <div class="timeline-subtitle">{{work_experience_1.company}}</div>
-            {{/if}}
-            {{#if work_experience_1.duration}}
-            <div class="timeline-date">{{work_experience_1.duration}}</div>
-            {{/if}}
-            {{#if work_experience_1.duties}}
-            <div class="timeline-desc">{{work_experience_1.duties}}</div>
-            {{/if}}
-          </div>
-          {{/if}}
-
-          {{#if work_experience_2}}
-          <div class="timeline-item">
-            <div class="timeline-title">{{work_experience_2.title}}</div>
-            {{#if work_experience_2.company}}
-            <div class="timeline-subtitle">{{work_experience_2.company}}</div>
-            {{/if}}
-            {{#if work_experience_2.duration}}
-            <div class="timeline-date">{{work_experience_2.duration}}</div>
-            {{/if}}
-            {{#if work_experience_2.duties}}
-            <div class="timeline-desc">{{work_experience_2.duties}}</div>
-            {{/if}}
-          </div>
-          {{/if}}
-
-          {{#if work_experience_3}}
-          <div class="timeline-item">
-            <div class="timeline-title">{{work_experience_3.title}}</div>
-            {{#if work_experience_3.company}}
-            <div class="timeline-subtitle">{{work_experience_3.company}}</div>
-            {{/if}}
-            {{#if work_experience_3.duration}}
-            <div class="timeline-date">{{work_experience_3.duration}}</div>
-            {{/if}}
-            {{#if work_experience_3.duties}}
-            <div class="timeline-desc">{{work_experience_3.duties}}</div>
-            {{/if}}
-          </div>
-          {{/if}}
-
-          {{#if work_experience_4}}
-          <div class="timeline-item">
-            <div class="timeline-title">{{work_experience_4.title}}</div>
-            {{#if work_experience_4.company}}
-            <div class="timeline-subtitle">{{work_experience_4.company}}</div>
-            {{/if}}
-            {{#if work_experience_4.duration}}
-            <div class="timeline-date">{{work_experience_4.duration}}</div>
-            {{/if}}
-            {{#if work_experience_4.duties}}
-            <div class="timeline-desc">{{work_experience_4.duties}}</div>
-            {{/if}}
-          </div>
-          {{/if}}
-
-          {{#if work_experience_5}}
-          <div class="timeline-item">
-            <div class="timeline-title">{{work_experience_5.title}}</div>
-            {{#if work_experience_5.company}}
-            <div class="timeline-subtitle">{{work_experience_5.company}}</div>
-            {{/if}}
-            {{#if work_experience_5.duration}}
-            <div class="timeline-date">{{work_experience_5.duration}}</div>
-            {{/if}}
-            {{#if work_experience_5.duties}}
-            <div class="timeline-desc">{{work_experience_5.duties}}</div>
-            {{/if}}
-          </div>
-          {{/if}}
-        </div>
-      </div>
-      {{/if}}
-
-      <!-- References -->
-      {{#if (or reference_1 reference_2 reference_3 reference_4 reference_5)}}
-      <div class="section">
-        <div class="section-header">
-          <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M4 19.5A2.5 2.5 0 016.5 17H20"/>
-            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/>
-          </svg>
-          <div class="section-title">References</div>
-        </div>
-        <div class="section-line"></div>
-        
-        <div class="ref-grid">
-          {{#if reference_1}}
-          <div class="ref-card">
-            {{{nl2br reference_1}}}
-          </div>
-          {{/if}}
-
-          {{#if reference_2}}
-          <div class="ref-card">
-            {{{nl2br reference_2}}}
-          </div>
-          {{/if}}
-
-          {{#if reference_3}}
-          <div class="ref-card">
-            {{{nl2br reference_3}}}
-          </div>
-          {{/if}}
-
-          {{#if reference_4}}
-          <div class="ref-card">
-            {{{nl2br reference_4}}}
-          </div>
-          {{/if}}
-
-          {{#if reference_5}}
-          <div class="ref-card">
-            {{{nl2br reference_5}}}
-          </div>
-          {{/if}}
-        </div>
-      </div>
-      {{/if}}
-
-      <!-- Languages -->
-      {{#if languages}}
-      <div class="section">
-        <div class="section-header">
-          <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="10"/>
-            <line x1="2" y1="12" x2="22" y2="12"/>
-            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-          </svg>
-          <div class="section-title">Languages</div>
-        </div>
-        <div class="section-line"></div>
-        
-        <div class="timeline-container">
-          <ul class="skills-list">
-            {{#each (splitLanguages languages)}}
-              {{#if (trim this)}}
-              <li>{{trim this}}</li>
-              {{/if}}
-            {{/each}}
-          </ul>
-        </div>
-      </div>
-      {{/if}}
-    </div>
-  </div>
+<div class="container">
+<div class="left-column">
+<div class="diagonal"></div>
+{{#if photo_url}}<div class="photo"><img src="{{{photo_url}}}" alt="Photo" crossorigin="anonymous"></div>{{/if}}
+<div class="name-box">
+{{#if full_name}}<div class="name">{{full_name}}</div>{{/if}}
+<div class="title">Professional Profile</div>
+</div>
+{{#if phone}}
+<div class="left-sec">
+<div class="left-title">📞 Contact</div>
+<div class="contact-item">📱 {{phone}}</div>
+{{#if email}}<div class="contact-item">📧 {{email}}</div>{{/if}}
+{{#if physical_address}}<div class="contact-item">📍 {{physical_address}}</div>{{/if}}
+</div>
+{{/if}}
+{{#if career_goal}}
+<div class="left-sec">
+<div class="left-title">👤 About Me</div>
+<div class="about-text">{{{nl2br career_goal}}}</div>
+</div>
+{{/if}}
+{{#if skills}}
+<div class="left-sec">
+<div class="left-title">🛠️ Skills</div>
+<div class="skills-list">{{{bulletList skills}}}</div>
+</div>
+{{/if}}
+</div>
+<div class="right-column">
+{{#if (or tertiary_education education_matric)}}
+<div class="right-sec">
+<div class="sec-header">
+<span class="sec-icon">🎓</span>
+<span class="sec-title">Education</span>
+</div>
+{{#if tertiary_education}}
+<div class="timeline">
+<div>{{{boldFirstLine tertiary_education}}}</div>
+</div>
+{{/if}}
+{{#if education_matric}}
+<div class="timeline">
+<div>{{{boldFirstLine education_matric}}}</div>
+</div>
+{{/if}}
+</div>
+{{/if}}
+{{#if (or work_experience_1 work_experience_2 work_experience_3 work_experience_4 work_experience_5)}}
+<div class="right-sec">
+<div class="sec-header">
+<span class="sec-icon">💼</span>
+<span class="sec-title">Experience</span>
+</div>
+{{#if work_experience_1}}
+<div class="timeline">
+<div class="entry-header">
+{{#if work_experience_1.title}}<div class="entry-title">{{work_experience_1.title}}</div>{{/if}}
+{{#if work_experience_1.duration}}<div class="entry-date">{{work_experience_1.duration}}</div>{{/if}}
+</div>
+{{#if work_experience_1.company}}<div class="entry-subtitle">{{work_experience_1.company}}</div>{{/if}}
+{{#if work_experience_1.duties}}<div class="entry-desc">{{{nl2br work_experience_1.duties}}}</div>{{/if}}
+</div>
+{{/if}}
+{{#if work_experience_2}}
+<div class="timeline">
+<div class="entry-header">
+{{#if work_experience_2.title}}<div class="entry-title">{{work_experience_2.title}}</div>{{/if}}
+{{#if work_experience_2.duration}}<div class="entry-date">{{work_experience_2.duration}}</div>{{/if}}
+</div>
+{{#if work_experience_2.company}}<div class="entry-subtitle">{{work_experience_2.company}}</div>{{/if}}
+{{#if work_experience_2.duties}}<div class="entry-desc">{{{nl2br work_experience_2.duties}}}</div>{{/if}}
+</div>
+{{/if}}
+{{#if work_experience_3}}
+<div class="timeline">
+<div class="entry-header">
+{{#if work_experience_3.title}}<div class="entry-title">{{work_experience_3.title}}</div>{{/if}}
+{{#if work_experience_3.duration}}<div class="entry-date">{{work_experience_3.duration}}</div>{{/if}}
+</div>
+{{#if work_experience_3.company}}<div class="entry-subtitle">{{work_experience_3.company}}</div>{{/if}}
+{{#if work_experience_3.duties}}<div class="entry-desc">{{{nl2br work_experience_3.duties}}}</div>{{/if}}
+</div>
+{{/if}}
+{{#if work_experience_4}}
+<div class="timeline">
+<div class="entry-header">
+{{#if work_experience_4.title}}<div class="entry-title">{{work_experience_4.title}}</div>{{/if}}
+{{#if work_experience_4.duration}}<div class="entry-date">{{work_experience_4.duration}}</div>{{/if}}
+</div>
+{{#if work_experience_4.company}}<div class="entry-subtitle">{{work_experience_4.company}}</div>{{/if}}
+{{#if work_experience_4.duties}}<div class="entry-desc">{{{nl2br work_experience_4.duties}}}</div>{{/if}}
+</div>
+{{/if}}
+{{#if work_experience_5}}
+<div class="timeline">
+<div class="entry-header">
+{{#if work_experience_5.title}}<div class="entry-title">{{work_experience_5.title}}</div>{{/if}}
+{{#if work_experience_5.duration}}<div class="entry-date">{{work_experience_5.duration}}</div>{{/if}}
+</div>
+{{#if work_experience_5.company}}<div class="entry-subtitle">{{work_experience_5.company}}</div>{{/if}}
+{{#if work_experience_5.duties}}<div class="entry-desc">{{{nl2br work_experience_5.duties}}}</div>{{/if}}
+</div>
+{{/if}}
+</div>
+{{/if}}
+{{#if certificates_combined}}
+<div class="right-sec">
+<div class="sec-header">
+<span class="sec-icon">📜</span>
+<span class="sec-title">Certifications & Qualifications</span>
+</div>
+<div class="entry-desc">{{{nl2br certificates_combined}}}</div>
+</div>
+{{/if}}
+{{#if (or reference_1 reference_2 reference_3 reference_4 reference_5)}}
+<div class="right-sec">
+<div class="sec-header">
+<span class="sec-icon">👥</span>
+<span class="sec-title">References</span>
+</div>
+<div class="ref-grid">
+{{#if reference_1}}
+<div class="ref-card">
+<div>{{{nl2br reference_1}}}</div>
+</div>
+{{/if}}
+{{#if reference_2}}
+<div class="ref-card">
+<div>{{{nl2br reference_2}}}</div>
+</div>
+{{/if}}
+{{#if reference_3}}
+<div class="ref-card">
+<div>{{{nl2br reference_3}}}</div>
+</div>
+{{/if}}
+{{#if reference_4}}
+<div class="ref-card">
+<div>{{{nl2br reference_4}}}</div>
+</div>
+{{/if}}
+{{#if reference_5}}
+<div class="ref-card">
+<div>{{{nl2br reference_5}}}</div>
+</div>
+{{/if}}
+</div>
+</div>
+{{/if}}
+{{#if languages}}
+<div class="right-sec">
+<div class="sec-header">
+<span class="sec-icon">🌍</span>
+<span class="sec-title">Languages</span>
+</div>
+<div class="skills-list">{{{bulletList languages}}}</div>
+</div>
+{{/if}}
+</div>
+</div>
 </body>
 </html>
