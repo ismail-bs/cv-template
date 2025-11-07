@@ -1,0 +1,7 @@
+{
+  "full_name": "Test User",
+  "phone": "invalid-phone-format",
+  "email": "not-an-email",
+  "career_goal": "This is a test CV with invalid data to demonstrate validation errors. The phone and email formats are intentionally wrong."
+}
+

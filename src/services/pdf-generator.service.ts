@@ -518,6 +518,16 @@ export class PDFGeneratorService {
         return a === b;
       });
     }
+
+    // Helper to format lists with bullet points (for skills/languages)
+    if (!handlebars.helpers['bulletList']) {
+      handlebars.registerHelper('bulletList', function (text: unknown) {
+        if (!text || typeof text !== 'string') return '';
+        const lines = text.split('\n').filter((line) => line.trim());
+        const items = lines.map((line) => `• ${handlebars.escapeExpression(line.trim())}`);
+        return new handlebars.SafeString(items.join('<br>'));
+      });
+    }
   }
 
   /**

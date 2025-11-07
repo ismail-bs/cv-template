@@ -14,7 +14,7 @@ export const config = {
   apiKey: process.env.API_KEY || 'default-dev-key',
 
   // Template
-  templateName: process.env.TEMPLATE_NAME || 'option-b.hbs',
+  templateName: process.env.TEMPLATE_NAME || 'option-premium-clean.hbs',
   templateDir: path.join(process.cwd(), process.env.TEMPLATE_DIR || 'templates'),
 
   // PDF Generation

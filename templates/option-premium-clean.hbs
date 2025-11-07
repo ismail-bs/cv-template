@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>CV</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+@page{size:A4;margin:0}
+body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;font-size:10.5pt;color:#5A6C7D;background:#fff;margin:0}
+.container{display:flex;width:210mm;height:297mm;overflow:hidden}
+.left-column{width:35%;background:#0066CC;color:#fff;position:relative;overflow:hidden}
+.diagonal{position:absolute;top:-50px;right:-80px;width:250px;height:250px;background:rgba(255,255,255,0.15);transform:rotate(45deg);z-index:0}
+.photo{width:165px;height:165px;border-radius:50%;background:#fff;margin:40px auto 30px;border:8px solid #fff;position:relative;z-index:1;overflow:hidden}
+.photo img{width:100%;height:100%;object-fit:cover;display:block}
+.name-box{background:#fff;padding:24px 30px;margin:0 0 36px;text-align:center;position:relative;z-index:2}
+.name-box .name{font-size:30pt;font-weight:700;color:#0066CC;line-height:1.15;margin-bottom:10px}
+.name-box .title{font-size:12.5pt;font-weight:400;color:#7B8794}
+.left-sec{padding:0 30px 28px;position:relative;z-index:1}
+.left-title{font-size:12pt;font-weight:700;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,0.3);display:flex;align-items:center;gap:11px}
+.left-title::before{content:'';width:19px;height:19px;display:inline-block;background:rgba(255,255,255,0.9);border-radius:2px;flex-shrink:0}
+.contact-item{display:flex;align-items:flex-start;gap:11px;margin-bottom:13px;font-size:10pt;line-height:1.7;word-break:break-word}
+.contact-item::before{content:'';width:15px;height:15px;display:inline-block;background:rgba(255,255,255,0.7);border-radius:50%;flex-shrink:0;margin-top:4px}
+.about-text{font-size:10pt;line-height:1.75;text-align:justify}
+.skills-list{font-size:10pt;line-height:1.7}
+.right-column{width:65%;padding:42px 36px 40px;background:#fff;overflow-y:auto}
+.right-sec{margin-bottom:32px}
+.sec-header{display:flex;align-items:center;gap:11px;margin-bottom:20px;padding-bottom:10px;border-bottom:1.5px solid #E5E7EB}
+.sec-icon{font-size:14pt;color:#6B7280}
+.sec-title{font-size:13pt;font-weight:700;color:#6B7280}
+.timeline{position:relative;padding-left:26px;margin-bottom:24px}
+.timeline::before{content:'';position:absolute;left:5px;top:7px;width:11px;height:11px;background:#0066CC;border-radius:50%}
+.timeline::after{content:'';position:absolute;left:10px;top:18px;bottom:-12px;width:2px;background:#0066CC}
+.timeline:last-child::after{display:none}
+.entry-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
+.entry-title{font-size:11.5pt;font-weight:600;color:#2C3E50;line-height:1.45}
+.entry-subtitle{font-size:10pt;color:#5A6C7D;margin-bottom:8px;font-style:italic}
+.entry-date{font-size:9.5pt;color:#9CA3AF;flex-shrink:0}
+.entry-desc{font-size:10pt;color:#5A6C7D;line-height:1.7;text-align:justify;margin-top:8px}
+.ref-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.ref-card{font-size:10pt;line-height:1.7}
+.ref-name{font-weight:600;color:#2C3E50}
+.ref-detail{color:#5A6C7D;font-size:9.5pt}
+</style>
+</head>
+<body>
+<div class="container">
+<div class="left-column">
+<div class="diagonal"></div>
+{{#if photo_url}}<div class="photo"><img src="{{{photo_url}}}" alt="Photo" crossorigin="anonymous"></div>{{/if}}
+<div class="name-box">
+{{#if full_name}}<div class="name">{{full_name}}</div>{{/if}}
+<div class="title">Professional Profile</div>
+</div>
+{{#if phone}}
+<div class="left-sec">
+<div class="left-title">Contact</div>
+<div class="contact-item">{{phone}}{{#if email}} | {{email}}{{/if}}</div>
+{{#if physical_address}}<div class="contact-item">{{physical_address}}</div>{{/if}}
+</div>
+{{/if}}
+{{#if career_goal}}
+<div class="left-sec">
+<div class="left-title">About Me</div>
+<div class="about-text">{{{nl2br career_goal}}}</div>
+</div>
+{{/if}}
+{{#if skills}}
+<div class="left-sec">
+<div class="left-title">Skills</div>
+<div class="skills-list">{{{bulletList skills}}}</div>
+</div>
+{{/if}}
+{{#if languages}}
+<div class="left-sec">
+<div class="left-title">Languages</div>
+<div class="skills-list">{{{bulletList languages}}}</div>
+</div>
+{{/if}}
+</div>
+<div class="right-column">
+{{#if (or tertiary_education education_matric)}}
+<div class="right-sec">
+<div class="sec-header">
+<span class="sec-icon">🎓</span>
+<span class="sec-title">Education</span>
+</div>
+{{#if tertiary_education}}
+<div class="timeline">
+<div>{{{boldFirstLine tertiary_education}}}</div>
+</div>
+{{/if}}
+{{#if education_matric}}
+<div class="timeline">
+<div>{{{boldFirstLine education_matric}}}</div>
+</div>
+{{/if}}
+</div>
+{{/if}}
+{{#if (or work_experience_1 work_experience_2 work_experience_3 work_experience_4 work_experience_5)}}
+<div class="right-sec">
+<div class="sec-header">
+<span class="sec-icon">💼</span>
+<span class="sec-title">Experience</span>
+</div>
+{{#if work_experience_1}}
+<div class="timeline">
+<div class="entry-header">
+{{#if work_experience_1.title}}<div class="entry-title">{{work_experience_1.title}}</div>{{/if}}
+{{#if work_experience_1.duration}}<div class="entry-date">{{work_experience_1.duration}}</div>{{/if}}
+</div>
+{{#if work_experience_1.company}}<div class="entry-subtitle">{{work_experience_1.company}}</div>{{/if}}
+{{#if work_experience_1.duties}}<div class="entry-desc">{{{nl2br work_experience_1.duties}}}</div>{{/if}}
+</div>
+{{/if}}
+{{#if work_experience_2}}
+<div class="timeline">
+<div class="entry-header">
+{{#if work_experience_2.title}}<div class="entry-title">{{work_experience_2.title}}</div>{{/if}}
+{{#if work_experience_2.duration}}<div class="entry-date">{{work_experience_2.duration}}</div>{{/if}}
+</div>
+{{#if work_experience_2.company}}<div class="entry-subtitle">{{work_experience_2.company}}</div>{{/if}}
+{{#if work_experience_2.duties}}<div class="entry-desc">{{{nl2br work_experience_2.duties}}}</div>{{/if}}
+</div>
+{{/if}}
+{{#if work_experience_3}}
+<div class="timeline">
+<div class="entry-header">
+{{#if work_experience_3.title}}<div class="entry-title">{{work_experience_3.title}}</div>{{/if}}
+{{#if work_experience_3.duration}}<div class="entry-date">{{work_experience_3.duration}}</div>{{/if}}
+</div>
+{{#if work_experience_3.company}}<div class="entry-subtitle">{{work_experience_3.company}}</div>{{/if}}
+{{#if work_experience_3.duties}}<div class="entry-desc">{{{nl2br work_experience_3.duties}}}</div>{{/if}}
+</div>
+{{/if}}
+{{#if work_experience_4}}
+<div class="timeline">
+<div class="entry-header">
+{{#if work_experience_4.title}}<div class="entry-title">{{work_experience_4.title}}</div>{{/if}}
+{{#if work_experience_4.duration}}<div class="entry-date">{{work_experience_4.duration}}</div>{{/if}}
+</div>
+{{#if work_experience_4.company}}<div class="entry-subtitle">{{work_experience_4.company}}</div>{{/if}}
+{{#if work_experience_4.duties}}<div class="entry-desc">{{{nl2br work_experience_4.duties}}}</div>{{/if}}
+</div>
+{{/if}}
+{{#if work_experience_5}}
+<div class="timeline">
+<div class="entry-header">
+{{#if work_experience_5.title}}<div class="entry-title">{{work_experience_5.title}}</div>{{/if}}
+{{#if work_experience_5.duration}}<div class="entry-date">{{work_experience_5.duration}}</div>{{/if}}
+</div>
+{{#if work_experience_5.company}}<div class="entry-subtitle">{{work_experience_5.company}}</div>{{/if}}
+{{#if work_experience_5.duties}}<div class="entry-desc">{{{nl2br work_experience_5.duties}}}</div>{{/if}}
+</div>
+{{/if}}
+</div>
+{{/if}}
+{{#if certificates_combined}}
+<div class="right-sec">
+<div class="sec-header">
+<span class="sec-icon">📜</span>
+<span class="sec-title">Certifications & Qualifications</span>
+</div>
+<div class="entry-desc">{{{nl2br certificates_combined}}}</div>
+</div>
+{{/if}}
+{{#if (or reference_1 reference_2 reference_3 reference_4 reference_5)}}
+<div class="right-sec">
+<div class="sec-header">
+<span class="sec-icon">👥</span>
+<span class="sec-title">References</span>
+</div>
+<div class="ref-grid">
+{{#if reference_1}}
+<div class="ref-card">
+<div>{{{nl2br reference_1}}}</div>
+</div>
+{{/if}}
+{{#if reference_2}}
+<div class="ref-card">
+<div>{{{nl2br reference_2}}}</div>
+</div>
+{{/if}}
+{{#if reference_3}}
+<div class="ref-card">
+<div>{{{nl2br reference_3}}}</div>
+</div>
+{{/if}}
+{{#if reference_4}}
+<div class="ref-card">
+<div>{{{nl2br reference_4}}}</div>
+</div>
+{{/if}}
+{{#if reference_5}}
+<div class="ref-card">
+<div>{{{nl2br reference_5}}}</div>
+</div>
+{{/if}}
+</div>
+</div>
+{{/if}}
+</div>
+</div>
+</body>
+</html>

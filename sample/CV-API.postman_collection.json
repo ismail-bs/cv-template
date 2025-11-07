@@ -1,0 +1,254 @@
+{
+  "info": {
+    "name": "CV to PDF API",
+    "description": "API collection for CV to PDF generation service with test cases",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/health",
+          "host": ["{{base_url}}"],
+          "path": ["health"]
+        },
+        "description": "Check if the API is running and healthy"
+      }
+    },
+    {
+      "name": "Generate PDF (Binary) - Valid",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-API-Key",
+            "value": "{{api_key}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"full_name\": \"Edson Nzuma\",\n  \"phone\": \"+27745214473\",\n  \"email\": \"edsonzuma@yahoo.com\",\n  \"physical_address\": \"63 Maureen Circle\",\n  \"education_matric\": \"Christ Ministries High\\nMatric- 2000\\nEnglish, xhosa, Zulu, Geography, Maths\",\n  \"tertiary_education\": \"NMU\\nComputer science\",\n  \"certificates\": \"Drivers license\",\n  \"other_qualifications\": \"Computer programming\",\n  \"skills\": \"Communication, management, problem solving\",\n  \"languages\": \"English & Xhosa\",\n  \"career_goal\": \"Management\",\n  \"cv_format_type_full_1\": \"Inchsquare Holdings\\nIT Manager\",\n  \"job_duration_1\": \"2010- 2020\",\n  \"job_duties_1\": \"As an IT manager my duties, encompass a wide range of responsibilities, primarily focused on overseeing a company's information technology infrastructure and operations. This includes managing IT staff, developing and implementing IT policies, managing budgets, ensuring system security, and troubleshooting technical issues. I played a key role in strategic planning, aligning IT initiatives with business goals, and staying abreast of new technologies.\",\n  \"cv_format_type_full_2\": \"Scotchem Corp\\nDirector\",\n  \"job_duration_2\": \"2020-Present\",\n  \"job_duties_2\": \"As an IT manager my duties, encompass a wide range of responsibilities, primarily focused on overseeing a company's information technology infrastructure and operations. This includes managing IT staff, developing and implementing IT policies, managing budgets, ensuring system security, and troubleshooting technical issues. I played a key role in strategic planning, aligning IT initiatives with business goals, and staying abreast of new technologies.\",\n  \"reference_1\": \"Director\\nInchsquare Holdings\\n+27745214473\",\n  \"reference_2\": \"Board\\nRod\\n+27755214473\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/cv/generate",
+          "host": ["{{base_url}}"],
+          "path": ["cv", "generate"]
+        },
+        "description": "Generate PDF with valid CV data and return as binary stream"
+      }
+    },
+    {
+      "name": "Generate PDF (Base64) - Valid",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-API-Key",
+            "value": "{{api_key}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"full_name\": \"Edson Nzuma\",\n  \"phone\": \"+27745214473\",\n  \"email\": \"edsonzuma@yahoo.com\",\n  \"physical_address\": \"63 Maureen Circle\",\n  \"education_matric\": \"Christ Ministries High\\nMatric- 2000\\nEnglish, xhosa, Zulu, Geography, Maths\",\n  \"tertiary_education\": \"NMU\\nComputer science\",\n  \"certificates\": \"Drivers license\",\n  \"other_qualifications\": \"Computer programming\",\n  \"skills\": \"Communication, management, problem solving\",\n  \"languages\": \"English & Xhosa\",\n  \"career_goal\": \"Management\",\n  \"cv_format_type_full_1\": \"Inchsquare Holdings\\nIT Manager\",\n  \"job_duration_1\": \"2010- 2020\",\n  \"job_duties_1\": \"As an IT manager my duties, encompass a wide range of responsibilities, primarily focused on overseeing a company's information technology infrastructure and operations. This includes managing IT staff, developing and implementing IT policies, managing budgets, ensuring system security, and troubleshooting technical issues. I played a key role in strategic planning, aligning IT initiatives with business goals, and staying abreast of new technologies.\",\n  \"cv_format_type_full_2\": \"Scotchem Corp\\nDirector\",\n  \"job_duration_2\": \"2020-Present\",\n  \"job_duties_2\": \"As an IT manager my duties, encompass a wide range of responsibilities, primarily focused on overseeing a company's information technology infrastructure and operations. This includes managing IT staff, developing and implementing IT policies, managing budgets, ensuring system security, and troubleshooting technical issues. I played a key role in strategic planning, aligning IT initiatives with business goals, and staying abreast of new technologies.\",\n  \"reference_1\": \"Director\\nInchsquare Holdings\\n+27745214473\",\n  \"reference_2\": \"Board\\nRod\\n+27755214473\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/cv/generate/base64",
+          "host": ["{{base_url}}"],
+          "path": ["cv", "generate", "base64"]
+        },
+        "description": "Generate PDF with valid CV data and return as base64 encoded string"
+      }
+    },
+    {
+      "name": "Generate PDF - No Email (Phone Centered)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-API-Key",
+            "value": "{{api_key}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"full_name\": \"Jane Doe\",\n  \"phone\": \"+27123456789\",\n  \"physical_address\": \"123 Main Street, Cape Town\",\n  \"career_goal\": \"Seeking a challenging position in software development where I can utilize my skills and contribute to team success.\",\n  \"tertiary_education\": \"University of Cape Town\\nBSc Computer Science - 2018\",\n  \"education_matric\": \"Green Valley High School\\nMatric - 2014\\nMathematics, Physical Science, English, Life Sciences\",\n  \"skills\": \"Python, JavaScript, TypeScript, React, Node.js, Docker\",\n  \"languages\": \"English, Afrikaans\",\n  \"cv_format_type_full_1\": \"ABC Tech Company\\nSoftware Developer\",\n  \"job_duration_1\": \"2019-2023\",\n  \"job_duties_1\": \"Developed and maintained web applications using modern JavaScript frameworks. Collaborated with cross-functional teams to deliver high-quality software solutions.\",\n  \"reference_1\": \"John Smith\\nSenior Manager\\nABC Tech Company\\n+27111222333\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/cv/generate/base64",
+          "host": ["{{base_url}}"],
+          "path": ["cv", "generate", "base64"]
+        },
+        "description": "Test that phone is centered when email is missing"
+      }
+    },
+    {
+      "name": "Generate PDF - Invalid Phone Format (400)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-API-Key",
+            "value": "{{api_key}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"full_name\": \"Test User\",\n  \"phone\": \"invalid-phone-format\",\n  \"email\": \"test@example.com\",\n  \"career_goal\": \"This should fail validation due to invalid phone format\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/cv/generate",
+          "host": ["{{base_url}}"],
+          "path": ["cv", "generate"]
+        },
+        "description": "Test validation with invalid phone format (should return 400)"
+      }
+    },
+    {
+      "name": "Generate PDF - Invalid Email Format (400)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-API-Key",
+            "value": "{{api_key}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"full_name\": \"Test User\",\n  \"phone\": \"+27123456789\",\n  \"email\": \"not-an-email\",\n  \"career_goal\": \"This should fail validation due to invalid email format\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/cv/generate",
+          "host": ["{{base_url}}"],
+          "path": ["cv", "generate"]
+        },
+        "description": "Test validation with invalid email format (should return 400)"
+      }
+    },
+    {
+      "name": "Generate PDF - Missing API Key (401)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"full_name\": \"Test User\",\n  \"career_goal\": \"This should fail authentication due to missing API key\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/cv/generate",
+          "host": ["{{base_url}}"],
+          "path": ["cv", "generate"]
+        },
+        "description": "Test authentication with missing API key (should return 401)"
+      }
+    },
+    {
+      "name": "Generate PDF - Invalid API Key (401)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-API-Key",
+            "value": "invalid-key-123",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"full_name\": \"Test User\",\n  \"career_goal\": \"This should fail authentication due to invalid API key\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/cv/generate",
+          "host": ["{{base_url}}"],
+          "path": ["cv", "generate"]
+        },
+        "description": "Test authentication with invalid API key (should return 401)"
+      }
+    },
+    {
+      "name": "Generate PDF - Invalid JSON (400)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-API-Key",
+            "value": "{{api_key}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{invalid json content}"
+        },
+        "url": {
+          "raw": "{{base_url}}/cv/generate",
+          "host": ["{{base_url}}"],
+          "path": ["cv", "generate"]
+        },
+        "description": "Test with invalid JSON payload (should return 400)"
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8080",
+      "type": "string"
+    },
+    {
+      "key": "api_key",
+      "value": "your-secret-api-key-change-this",
+      "type": "string"
+    }
+  ]
+}
+

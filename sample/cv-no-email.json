@@ -1,0 +1,15 @@
+{
+  "full_name": "Jane Doe",
+  "phone": "+27123456789",
+  "physical_address": "123 Main Street, Cape Town",
+  "career_goal": "Seeking a challenging position in software development where I can utilize my skills and contribute to team success.",
+  "tertiary_education": "University of Cape Town\nBSc Computer Science - 2018",
+  "education_matric": "Green Valley High School\nMatric - 2014\nMathematics, Physical Science, English, Life Sciences",
+  "skills": "Python, JavaScript, TypeScript, React, Node.js, Docker",
+  "languages": "English, Afrikaans",
+  "cv_format_type_full_1": "ABC Tech Company\nSoftware Developer",
+  "job_duration_1": "2019-2023",
+  "job_duties_1": "Developed and maintained web applications using modern JavaScript frameworks. Collaborated with cross-functional teams to deliver high-quality software solutions.",
+  "reference_1": "John Smith\nSenior Manager\nABC Tech Company\n+27111222333"
+}
+

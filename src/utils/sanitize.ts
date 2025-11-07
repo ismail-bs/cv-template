@@ -29,8 +29,8 @@ export function isEmpty(value: unknown): boolean {
     if (trimmed === '' || trimmed === '@' || trimmed.toLowerCase() === 'none') {
       return true;
     }
-    // Check for placeholder patterns like @field_name
-    if (/^@[a-zA-Z_]+$/.test(trimmed)) {
+    // Check for placeholder patterns like @field_name or @reference_1
+    if (/^@[a-zA-Z0-9_]+$/.test(trimmed)) {
       return true;
     }
   }

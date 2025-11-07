@@ -1,0 +1,18 @@
+{
+    "full_name": "Format Test Person",
+    "phone": "+27745214473",
+    "email": "test@example.com",
+    "physical_address": "123 Test Street",
+    "photo_url": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop",
+    "career_goal": "Testing various list formats",
+    "tertiary_education": "University\nDegree",
+    "education_matric": "High School\nMatric - 2020",
+    "certificates": "@",
+    "other_qualifications": "@",
+    "skills": "Communication, Leadership, Problem Solving, Team Work",
+    "languages": "English & Xhosa & Zulu",
+    "cv_format_type_full_1": "Test Company\nTest Position",
+    "job_duration_1": "2020-Present",
+    "job_duties_1": "Testing various formats",
+    "reference_1": "John Doe\nManager\n011 123 4567"
+}

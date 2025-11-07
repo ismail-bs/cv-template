@@ -52,9 +52,9 @@ export class CVProcessorService {
       processed.other_qualifications_bullet = otherQualifications;
     }
 
-    // Skills and Languages
-    processed.skills = processField(data.skills);
-    processed.languages = processField(data.languages);
+    // Skills and Languages - convert comma-separated to bullet points
+    processed.skills = this.formatCommaSeparated(processField(data.skills));
+    processed.languages = this.formatCommaSeparated(processField(data.languages));
 
     // Work Experience (up to 5 positions)
     for (let i = 1; i <= 5; i++) {
@@ -170,6 +170,35 @@ export class CVProcessorService {
       duration: processedDuration || '',
       duties: processedDuties || '',
     };
+  }
+
+  /**
+   * Format comma-separated values into bullet-point list
+   * Handles multiple formats:
+   * - Comma-separated: "A, B, C"
+   * - Ampersand-separated: "English & Xhosa"
+   * - Mixed: "A, B & C"
+   * - Newline-separated: "A\nB\nC" (already formatted)
+   */
+  private formatCommaSeparated(value: string | undefined): string | undefined {
+    if (!value) {
+      return undefined;
+    }
+
+    // If already contains newlines, return as-is (already in bullet format)
+    if (value.includes('\n')) {
+      return value;
+    }
+
+    // Split by comma, ampersand, or both
+    // Replace & with comma first, then split by comma
+    const normalized = value.replace(/\s*&\s*/g, ', ');
+    const items = normalized
+      .split(',')
+      .map((item) => item.trim())
+      .filter((item) => item.length > 0);
+
+    return items.length > 0 ? items.join('\n') : undefined;
   }
 }
 
