@@ -5,6 +5,7 @@
 export interface CVData {
   // Personal Information
   full_name?: string;
+  designation?: string; // Job title/designation
   phone?: string;
   email?: string;
   physical_address?: string;
@@ -63,6 +64,7 @@ export interface CVData {
  */
 export interface ProcessedCVData {
   full_name?: string;
+  designation?: string; // Job title/designation
   phone?: string;
   email?: string;
   physical_address?: string;

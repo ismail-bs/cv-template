@@ -21,10 +21,12 @@ export class CVProcessorService {
 
     // Personal Information
     processed.full_name = processField(data.full_name);
+    processed.designation = processField(data.designation);
     processed.phone = formatPhoneNumber(processField(data.phone));
     processed.email = processField(data.email);
     processed.physical_address = processField(data.physical_address);
-    processed.photo_url = processField(data.photo_url);
+    // Always pass photo_url through (even if empty) so template can check it
+    processed.photo_url = data.photo_url && typeof data.photo_url === 'string' ? data.photo_url.trim() : undefined;
     processed.splash_image = processField(data.splash_image);
 
     // If email is missing, center the phone

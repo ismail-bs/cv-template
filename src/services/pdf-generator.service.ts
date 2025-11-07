@@ -461,6 +461,13 @@ export class PDFGeneratorService {
       });
     }
 
+    // Helper for equality comparison (used for contentMode)
+    if (!handlebars.helpers['eq']) {
+      handlebars.registerHelper('eq', function (a: unknown, b: unknown) {
+        return a === b;
+      });
+    }
+
     // Helper to format multiline text
     if (!handlebars.helpers['nl2br']) {
       handlebars.registerHelper('nl2br', function (text: unknown) {

@@ -20,6 +20,7 @@ const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 export const cvSchema = Joi.object({
   // Personal Information
   full_name: Joi.string().trim().max(200).optional(),
+  designation: Joi.string().trim().max(200).optional().allow('', null),
   phone: Joi.string()
     .trim()
     .pattern(phonePattern)
