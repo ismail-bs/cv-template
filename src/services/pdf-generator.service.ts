@@ -524,7 +524,15 @@ export class PDFGeneratorService {
       handlebars.registerHelper('bulletList', function (text: unknown) {
         if (!text || typeof text !== 'string') return '';
         const lines = text.split('\n').filter((line) => line.trim());
-        const items = lines.map((line) => `• ${handlebars.escapeExpression(line.trim())}`);
+        const items = lines.map((line) => {
+          const trimmed = line.trim();
+          // If line already starts with a bullet, remove it first, then add a single bullet
+          let cleanLine = trimmed;
+          if (cleanLine.startsWith('•') || cleanLine.startsWith('-') || cleanLine.startsWith('*')) {
+            cleanLine = cleanLine.substring(1).trim();
+          }
+          return `• ${handlebars.escapeExpression(cleanLine)}`;
+        });
         return new handlebars.SafeString(items.join('<br>'));
       });
     }
