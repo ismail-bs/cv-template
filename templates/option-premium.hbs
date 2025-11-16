@@ -58,11 +58,14 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;font-size:10.5pt;co
 {{#if physical_address}}<div class="contact-item">📍 {{physical_address}}</div>{{/if}}
 </div>
 {{/if}}
+{{!-- Only show About Me in left column if there IS work experience --}}
+{{#if (or work_experience_1 work_experience_2 work_experience_3 work_experience_4 work_experience_5)}}
 {{#if career_goal}}
 <div class="left-sec">
 <div class="left-title">👤 About Me</div>
 <div class="about-text">{{{nl2br career_goal}}}</div>
 </div>
+{{/if}}
 {{/if}}
 {{#if skills}}
 <div class="left-sec">
@@ -79,6 +82,18 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;font-size:10.5pt;co
 {{/if}}
 </div>
 <div class="right-column">
+{{!-- Show About Me first in right column if there is NO work experience --}}
+{{#unless (or work_experience_1 work_experience_2 work_experience_3 work_experience_4 work_experience_5)}}
+{{#if career_goal}}
+<div class="right-sec">
+<div class="sec-header">
+<span class="sec-icon">👤</span>
+<span class="sec-title">About Me</span>
+</div>
+<div class="about-text">{{{nl2br career_goal}}}</div>
+</div>
+{{/if}}
+{{/unless}}
 {{#if (or tertiary_education education_matric)}}
 <div class="right-sec">
 <div class="sec-header">
