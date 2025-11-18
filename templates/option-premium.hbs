@@ -55,30 +55,30 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;font-size:10.5pt;co
 </div>
 {{#if phone}}
 <div class="left-sec">
-<div class="left-title">📞 Contact</div>
-<div class="contact-item">📱 {{phone}}</div>
-{{#if email}}<div class="contact-item">📧 {{email}}</div>{{/if}}
-{{#if physical_address}}<div class="contact-item">📍 {{physical_address}}</div>{{/if}}
+<div class="left-title">&#9742; Contact</div>
+<div class="contact-item">&#9742; {{phone}}</div>
+{{#if email}}<div class="contact-item">&#9993; {{email}}</div>{{/if}}
+{{#if physical_address}}<div class="contact-item">&#9873; {{physical_address}}</div>{{/if}}
 </div>
 {{/if}}
 {{!-- Only show About Me in left column if there IS work experience --}}
 {{#if (or work_experience_1 work_experience_2 work_experience_3 work_experience_4 work_experience_5)}}
 {{#if career_goal}}
 <div class="left-sec">
-<div class="left-title">👤 About Me</div>
+<div class="left-title">&#9787; About Me</div>
 <div class="about-text">{{{nl2br career_goal}}}</div>
 </div>
 {{/if}}
 {{/if}}
 {{#if skills}}
 <div class="left-sec">
-<div class="left-title">🛠️ Skills</div>
+<div class="left-title">&#9998; Skills</div>
 <div class="skills-list">{{{bulletList skills}}}</div>
 </div>
 {{/if}}
 {{#if (or training_cert_bullet other_qualifications_bullet)}}
 <div class="left-sec">
-<div class="left-title">📋 Certifications</div>
+<div class="left-title">&#10003; Certifications</div>
 {{#if training_cert_bullet}}<div class="skills-list">{{{bulletList training_cert_bullet}}}</div>{{/if}}
 {{#if other_qualifications_bullet}}<div class="skills-list">{{{bulletList other_qualifications_bullet}}}</div>{{/if}}
 </div>
@@ -90,7 +90,7 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;font-size:10.5pt;co
 {{#if career_goal}}
 <div class="right-sec">
 <div class="sec-header">
-<span class="sec-icon">👤</span>
+<span class="sec-icon">&#9787;</span>
 <span class="sec-title">About Me</span>
 </div>
 <div class="about-text">{{{nl2br career_goal}}}</div>
@@ -100,7 +100,7 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;font-size:10.5pt;co
 {{#if (or tertiary_education education_matric)}}
 <div class="right-sec">
 <div class="sec-header">
-<span class="sec-icon">🎓</span>
+<span class="sec-icon">&#127891;</span>
 <span class="sec-title">Education</span>
 </div>
 <div class="timeline-container">
@@ -120,7 +120,7 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;font-size:10.5pt;co
 {{#if (or work_experience_1 work_experience_2 work_experience_3 work_experience_4 work_experience_5)}}
 <div class="right-sec">
 <div class="sec-header">
-<span class="sec-icon">💼</span>
+<span class="sec-icon">&#128188;</span>
 <span class="sec-title">Experience</span>
 </div>
 <div class="timeline-container">
@@ -180,7 +180,7 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;font-size:10.5pt;co
 {{#if certificates_combined}}
 <div class="right-sec">
 <div class="sec-header">
-<span class="sec-icon">📜</span>
+<span class="sec-icon">&#128196;</span>
 <span class="sec-title">Certifications & Qualifications</span>
 </div>
 <div class="entry-desc">{{{nl2br certificates_combined}}}</div>
@@ -189,7 +189,7 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;font-size:10.5pt;co
 {{#if (or reference_1 reference_2 reference_3 reference_4 reference_5)}}
 <div class="right-sec">
 <div class="sec-header">
-<span class="sec-icon">👥</span>
+<span class="sec-icon">&#128101;</span>
 <span class="sec-title">References</span>
 </div>
 <div class="ref-grid">
@@ -224,7 +224,7 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;font-size:10.5pt;co
 {{#if languages}}
 <div class="right-sec">
 <div class="sec-header">
-<span class="sec-icon">🌍</span>
+<span class="sec-icon">&#127758;</span>
 <span class="sec-title">Languages</span>
 </div>
 <div class="skills-list">{{{bulletList languages}}}</div>
