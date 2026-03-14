@@ -234,7 +234,11 @@ export class PDFGeneratorService {
 
       // Enable images and set user agent
       await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36');
-      
+
+      // Set a tall viewport so the full document is laid out (enables multi-page PDF)
+      // A4 width ~794px at 96dpi; height large so long CVs render and paginate correctly
+      await page.setViewport({ width: 794, height: 20000, deviceScaleFactor: 1 });
+
       // Load and compile template
       const template = await this.loadTemplate(config.templateName);
 
@@ -284,7 +288,7 @@ export class PDFGeneratorService {
           margin: {
             top: '0mm',
             right: '0mm',
-            bottom: '0mm',
+            bottom: '14mm',
             left: '0mm',
           },
         });
