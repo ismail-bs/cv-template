@@ -281,12 +281,7 @@ export class PDFGeneratorService {
         const pdfResult = await page.pdf({
           format: 'A4',
           printBackground: true,
-          margin: {
-            top: '0mm',
-            right: '0mm',
-            bottom: '0mm',
-            left: '0mm',
-          },
+          // Omit margin so CSS @page rules control per-page margins (e.g. 2nd page top margin)
         });
         pdf = Buffer.from(pdfResult);
         logger.debug('PDF generated successfully', { pdfSize: pdf.length });
